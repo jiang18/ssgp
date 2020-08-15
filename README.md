@@ -91,6 +91,8 @@ plink --file 500k --make-bed --out 500k --chr-set 30
 ```
 ## Simulate phenotypes based on genosim output
 ```R
+# sim_phe.R
+
 lines =  readLines("genomic.bv")
 oddlines = lines[seq (1, length(lines),2)]
 dat = strsplit(oddlines, split = " +")
