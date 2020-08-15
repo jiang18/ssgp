@@ -107,7 +107,8 @@ ve = vg*(1-hsq)/hsq
 err = matrix(rnorm(500000*99), nrow = 500000) %*% diag(sqrt(ve))
 phe[,4:102] = apply(phe[,4:102],2, as.numeric) + err
 
-write.csv(phe,"500k.ssgp.csv",row.names = FALSE, quote=FALSE)
 write.table(phe,"500k.bolt.txt",row.names = FALSE, quote=FALSE)
+phe = phe[,2:ncol(phe)]
+write.csv(phe,"500k.ssgp.csv",row.names = FALSE, quote=FALSE)
 ```
 
