@@ -89,3 +89,23 @@ close OUT;
 ```
 plink --file 500k --make-bed --out 500k --chr-set 30
 ```
+## Simulate phenotypes based on genosim output
+```R
+lines =  readLines("genomic.bv")
+oddlines = lines[seq (1, length(lines),2)]
+dat = strsplit(oddlines, split = " +")
+phe = matrix(unlist(dat), ncol = 102, byrow = TRUE)
+phe[,1] = 0
+colnames(phe) = c("FID","IID","N",1:99)
+
+vg = apply(phe[,4:102],2,var)
+hsq = c(rep(0.05,33), rep(0.25,33), rep(0.55,33))
+ve = vg*(1-hsq)/hsq
+
+err = matrix(rnorm(500000*99), nrow = 500000) %*% diag(sqrt(ve))
+phe[,4:102] = apply(phe[,4:102],2, as.numeric) + err
+
+write.csv(phe,"500k.ssgp.csv",row.names = FALSE, quote=FALSE)
+write.table(phe,"500k.bolt.txt",row.names = FALSE, quote=FALSE)
+```
+
