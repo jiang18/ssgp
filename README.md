@@ -30,7 +30,7 @@ close OUT;
 ```
 2. markersim.options
 ```
-  60000     10000      1.0         0          100
+  50000     50000      1.0         0          99
   loci     qtls    curvparm   correlated   traits
 
  96     30        .01       .99       0
