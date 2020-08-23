@@ -7,11 +7,11 @@
 use strict;
 use warnings;
 
+@ARGV == 1 or die "One parameter needed: sample size\n";
+my ($np) = @ARGV;
 my $st = 1000000;
-my $np = 500000;
 
 open OUT,">pedigree.file";
-
 for(1..$np){
         my $id = $_+$st;
         print OUT "F     $id        -1       -2 20000101  0.0    0\n";
@@ -19,18 +19,19 @@ for(1..$np){
 close OUT;
 
 open OUT,">genotype.data0";
-
 print OUT "idnum  chip\n\n";
-
 for(1..$np){
         my $id = $_+$st;
         print  OUT "    $id    1\n";
 }
 close OUT;
 ```
+```shell
+foo@bar:~$ perl sim_ped.pl 500000
+```
 2. markersim.options
 ```
-  50000     50000      1.0         0          99
+  50000      0      1.0         0           1
   loci     qtls    curvparm   correlated   traits
 
  96     30        .01       .99       0
@@ -49,6 +50,10 @@ Morgans  LDparam  hapout
   30      30      .00      .000   .00000003
 chromes Xchrome  notread   errate   mutate
 ```
+```shell
+foo@bar:~$ ./markersim
+foo@bar:~$ ./genosim
+```
 ## Convert genosim output files to plink files
 ```perl
 # aipl2plink.pl
@@ -56,9 +61,11 @@ chromes Xchrome  notread   errate   mutate
 use strict;
 use warnings;
 
-open IN,"genotypes.true";
-open OUT,">500k.ped";
+@ARGV == 1 or die "One parameter needed: plink file prefix\n";
+my ($plink) = @ARGV;
 
+open IN,"genotypes.true";
+open OUT,">$plink.ped";
 my %gt = (0=>11, 1=>12, 2=>22);
 while(<IN>)
 {
@@ -75,7 +82,7 @@ close IN;
 close OUT;
 
 open IN,"chromosome.data";
-open OUT,">500k.map";
+open OUT,">$plink.map";
 $_=<IN>;
 while(<IN>)
 {
@@ -86,8 +93,9 @@ while(<IN>)
 close IN;
 close OUT;
 ```
-```
-plink --file 500k --make-bed --out 500k --chr-set 30
+```shell
+foo@bar:~$ perl aipl2plink.pl 500k
+foo@bar:~$ plink --file 500k --make-bed --out 500k --chr-set 30
 ```
 ## Simulate phenotypes based on genosim output
 ```R
