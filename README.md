@@ -150,10 +150,8 @@ ii = args[1]
 hsq = as.numeric(args[2])
 print(paste("h2=",hsq,sep=""))
 
-# sample size
-n = 500000
-
 gv = read.table(paste("gv/",ii,".csv",sep=""),sep=",")
+n = nrow(gv)
 vg = var(gv[,2])
 ve = vg*(1-hsq)/hsq
 print(paste("VarG=",vg,sep=""))
