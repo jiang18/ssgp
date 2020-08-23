@@ -7,7 +7,7 @@
 use strict;
 use warnings;
 
-@ARGV == 1 or die "One parameter needed: sample size\n";
+@ARGV == 1 or die "One argument needed: sample size\n";
 my ($np) = @ARGV;
 my $st = 1000000;
 
@@ -26,7 +26,7 @@ for(1..$np){
 }
 close OUT;
 ```
-```shell
+```console
 foo@bar:~$ perl sim_ped.pl 500000
 ```
 2. markersim.options
@@ -50,7 +50,7 @@ Morgans  LDparam  hapout
   30      30      .00      .000   .00000003
 chromes Xchrome  notread   errate   mutate
 ```
-```shell
+```console
 foo@bar:~$ ./markersim
 foo@bar:~$ ./genosim
 ```
@@ -61,7 +61,7 @@ foo@bar:~$ ./genosim
 use strict;
 use warnings;
 
-@ARGV == 1 or die "One parameter needed: plink file prefix\n";
+@ARGV == 1 or die "One argument needed: plink file prefix\n";
 my ($plink) = @ARGV;
 
 open IN,"genotypes.true";
@@ -93,7 +93,7 @@ while(<IN>)
 close IN;
 close OUT;
 ```
-```shell
+```console
 foo@bar:~$ perl aipl2plink.pl 500k
 foo@bar:~$ plink --file 500k --make-bed --out 500k --chr-set 30
 ```
