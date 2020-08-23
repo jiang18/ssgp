@@ -1,5 +1,5 @@
 # SSGP
-## Simulate genotypes and phenotypes with [genosim](https://aipl.arsusda.gov/software/genosim/)
+## Simulate genotypes with [genosim](https://aipl.arsusda.gov/software/genosim/)
 1. pedigree.file and genotype.data0
 ```perl
 # sim_ped.pl
@@ -97,26 +97,79 @@ close OUT;
 foo@bar:~$ perl aipl2plink.pl 500k
 foo@bar:~$ plink --file 500k --make-bed --out 500k --chr-set 30
 ```
-## Simulate phenotypes based on genosim output
+## Simulate phenotypes based on genosim output files
+```perl
+# sim_snp_effects.pl
+
+use strict;
+use warnings;
+
+my @snps;
+my %freq;
+open IN,"../true.frequency";
+while(<IN>)
+{
+        chomp;
+        my @c = split /\s+/;
+        push @snps, $c[0];
+        $freq{$c[0]} = $c[2];
+}
+close IN;
+
+my $PI = 2 * atan2 1, 0;
+my @nums = map {
+    sqrt(-2 * log rand) * cos(2 * $PI * rand)
+} 1..@snps;
+
+@ARGV == 1 or die "One argument needed: output filename\n";
+my ($out) = @ARGV;
+
+open OUT,">$out";
+print OUT "SNP,Chr,Pos,Allele1,Allele2,MAF,HWE_Pval,Group,Weight,Effect\n";
+
+for(0..$#snps) {
+        my $f = $freq{$snps[$_]};
+        my $e = $nums[$_]/sqrt(2*$f*(1-$f));
+        print OUT "$snps[$_],0,0,1,2,$f,0,NULL,1,$e\n";
+}
+close OUT;
+```
+```console
+foo@bar:~$ mkdir pheno
+foo@bar:~$ cd pheno
+foo@bar:~$ mkdir snp
+foo@bar:~$ mkdir gv
+foo@bar:~$ perl sim_snp_effects.pl ./snp/1.csv
+foo@bar:~$ ssgp --pred --binary_genotype ../500k --snp_estimate ./snp/1.csv --output ./gv/1
+```
 ```R
 # sim_phe.R
 
-lines =  readLines("genomic.bv")
-oddlines = lines[seq (1, length(lines),2)]
-dat = strsplit(oddlines, split = " +")
-phe = matrix(unlist(dat), ncol = 102, byrow = TRUE)
-phe[,1] = 0
-colnames(phe) = c("FID","IID","N",1:99)
+args <- commandArgs(trailingOnly=TRUE)
+ii = args[1]
+hsq = as.numeric(args[2])
+print(paste("h2=",hsq,sep=""))
 
-vg = apply(phe[,4:102],2,var)
-hsq = c(rep(0.05,33), rep(0.25,33), rep(0.55,33))
+# sample size
+n = 500000
+
+gv = read.table(paste("gv/",ii,".csv",sep=""),sep=",")
+vg = var(gv[,2])
 ve = vg*(1-hsq)/hsq
+print(paste("VarG=",vg,sep=""))
 
-err = matrix(rnorm(500000*99), nrow = 500000) %*% diag(sqrt(ve))
-phe[,4:102] = apply(phe[,4:102],2, as.numeric) + err
+err = rnorm(n) * sqrt(ve)
+phe = matrix(nrow=n, ncol=3)
+phe[,1] = 0
+phe[,2] = gv[,1]
+phe[,3] = gv[,2] + err
+print(paste("VarP=",var(phe[,3]),sep=""))
 
-write.table(phe,"500k.bolt.txt",row.names = FALSE, quote=FALSE)
+colnames(phe) = c("FID","IID","QT")
+write.table(phe,paste(ii,".bolt.txt",sep=""),row.names = FALSE, quote=FALSE)
 phe = phe[,2:ncol(phe)]
-write.csv(phe,"500k.ssgp.csv",row.names = FALSE, quote=FALSE)
+write.csv(phe,paste(ii,".ssgp.csv",sep=""),row.names = FALSE, quote=FALSE)
 ```
-
+```console
+foo@bar:~$ Rscript --no-save sim_phe.R 1 0.25
+```
