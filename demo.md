@@ -9,7 +9,7 @@
 
 # How-to
 ```console
-ssgp.avx2 --phenotype_file phen.csv --trait_name milk --snp_info_file snp_info.csv --snp_set_name group --binary_genotype_file geno --snp_scale_value 1 --output out --num_threads 2
+ssgp.avx2 --phenotype_file phen.csv --trait_name milk --snp_info_file snp_info.csv --snp_set_name group --binary_genotype_file geno --snp_scale_value 10 --output out --num_threads 2
 ```
 ```console
 ssgp.avx2 --prediction --snp_estimate_file out.snp.csv --binary_genotype_file validation.geno --output validation.ebv
