@@ -42,5 +42,5 @@ foo@bar:~$ perl sim_snp_effects.pl 1.snp.csv
 foo@bar:~$ ssgp --pred --binary_genotype ../500k --snp_estimate 1.snp.csv --output 1.gv
 ```
 ```console
-foo@bar:~$ Rscript --no-save sim_phe.R 1 0.25
+foo@bar:~$ Rscript --no-save sim_phe.R 1 0.3
 ```
