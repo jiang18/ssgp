@@ -38,10 +38,8 @@ foo@bar:~$ plink --file 500k --make-bed --out 500k --chr-set 30
 ```console
 foo@bar:~$ mkdir pheno
 foo@bar:~$ cd pheno
-foo@bar:~$ mkdir snp
-foo@bar:~$ mkdir gv
-foo@bar:~$ perl sim_snp_effects.pl ./snp/1.csv
-foo@bar:~$ ssgp --pred --binary_genotype ../500k --snp_estimate ./snp/1.csv --output ./gv/1
+foo@bar:~$ perl sim_snp_effects.pl 1.snp.csv
+foo@bar:~$ ssgp --pred --binary_genotype ../500k --snp_estimate 1.snp.csv --output 1.gv
 ```
 ```console
 foo@bar:~$ Rscript --no-save sim_phe.R 1 0.25
