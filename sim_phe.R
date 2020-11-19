@@ -5,7 +5,7 @@ ii = args[1]
 hsq = as.numeric(args[2])
 print(paste("h2=",hsq,sep=""))
 
-gv = read.table(paste("gv/",ii,".csv",sep=""),sep=",")
+gv = read.table(paste(ii,".gv.csv",sep=""),sep=",")
 n = nrow(gv)
 vg = var(gv[,2])
 ve = vg*(1-hsq)/hsq
