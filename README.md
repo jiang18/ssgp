@@ -1,4 +1,4 @@
-# SSGP
+# Simulation
 ## Simulate genotypes with [genosim](https://aipl.arsusda.gov/software/genosim/)
 1. pedigree.file and genotype.data0
 ```console
@@ -44,3 +44,4 @@ foo@bar:~$ ssgp --pred --binary_genotype ../500k --snp_estimate 1.snp.csv --outp
 ```console
 foo@bar:~$ Rscript --no-save sim_phe.R 1 0.3
 ```
+# GCTA-fastGWA
