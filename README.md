@@ -1,3 +1,6 @@
+# Executables
+https://drive.google.com/drive/folders/1SwDld404x6r4p3nIvf6g0VJ9Nh2ZRHtK?usp=sharing
+
 # Simulation
 The procedures below generate genotypes and phenotypes of 500K individuals. Modify the sample size if needed. 
 ## Simulate genotypes with [genosim](https://aipl.arsusda.gov/software/genosim/)
