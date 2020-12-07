@@ -46,6 +46,7 @@ foo@bar:~$ Rscript --no-save sim_phe.R 1 0.3
 ```
 # GCTA-fastGWA
 # SSGP
+Note that the simulation procedures above generate a sample of 500K while the commands below work for a sample of 10K.
 ## REML
 ```console
 foo@bar:~$ mkdir ssgp
