@@ -53,7 +53,7 @@ foo@bar:~$ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file 
 ```
 ## LMM and GWA
 ```console
-foo@bar:~$ ssgp.avx2 --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k --trait QT --lmm --snp_info_file snp_info.csv --out 1 --num_threads 10 --num_qf_markers 30
+foo@bar:~$ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k --trait QT --lmm --snp_info_file snp_info.csv --out 1 --num_threads 10 --num_qf_markers 30
 foo@bar:~$ OMP_NUM_THREADS=10 ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 foo@bar:~$ OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
