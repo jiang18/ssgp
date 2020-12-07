@@ -1,4 +1,5 @@
 # Simulation
+The procedures below generate genotypes and phenotypes of 500K individuals. Modify the sample size if needed. 
 ## Simulate genotypes with [genosim](https://aipl.arsusda.gov/software/genosim/)
 1. pedigree.file and genotype.data0
 ```console
