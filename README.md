@@ -29,6 +29,7 @@ Morgans  LDparam  hapout
   30      30      .00      .000   .00000003
 chromes Xchrome  notread   errate   mutate
 ```
+5. Run genosim
 ```console
 ./markersim
 ./genosim
