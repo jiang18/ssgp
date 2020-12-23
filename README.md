@@ -53,6 +53,7 @@ Note that the simulation procedures above generate a sample of 500K while the co
 ## REML
 ```console
 foo@bar:~$ mkdir ssgp
+foo@bar:~$ cd ssgp
 foo@bar:~$ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k --trait QT --reml --snp_info_file snp_info.csv --out 1 --num_threads 10 --num_random_probes 30
 ```
 ## LMM and GWA
@@ -64,11 +65,13 @@ foo@bar:~$ OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.ch
 # GCTA-fastGWA
 # BOLT
 ```console
-~/software/BOLT-LMM_v2.3.4/bolt \
+foo@bar:~$ mkdir bolt
+foo@bar:~$ cd bolt
+foo@bar:~$ ~/software/BOLT-LMM_v2.3.4/bolt \
   --lmmInfOnly --bed=../10k/10k.bed --bim=../10k/10k.bim --fam=../10k/10k.fam \
   --phenoFile=../10k/pheno/1.bolt.txt --phenoCol=QT \
   --numThreads=10 --Nautosomes=30 --LDscoresUseChip \
   --verboseStats --statsFile=10k.1.lmm.txt
- ```
+```
  
 
