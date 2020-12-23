@@ -48,7 +48,6 @@ foo@bar:~$ ssgp --pred --binary_genotype ../500k --snp_estimate 1.snp.csv --outp
 ```console
 foo@bar:~$ Rscript --no-save sim_phe.R 1 0.3
 ```
-# GCTA-fastGWA
 # SSGP
 Note that the simulation procedures above generate a sample of 500K while the commands below work for a sample of 10K.
 ## REML
@@ -62,5 +61,14 @@ foo@bar:~$ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file 
 foo@bar:~$ OMP_NUM_THREADS=10 ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 foo@bar:~$ OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
-
+# GCTA-fastGWA
+# BOLT
+```console
+~/software/BOLT-LMM_v2.3.4/bolt \
+  --lmmInfOnly --bed=../10k/10k.bed --bim=../10k/10k.bim --fam=../10k/10k.fam \
+  --phenoFile=../10k/pheno/1.bolt.txt --phenoCol=QT \
+  --numThreads=10 --Nautosomes=30 --LDscoresUseChip \
+  --verboseStats --statsFile=10k.1.lmm.txt
+ ```
+ 
 
