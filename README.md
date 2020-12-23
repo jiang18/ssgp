@@ -75,5 +75,10 @@ cd bolt
   --numThreads=10 --Nautosomes=30 --LDscoresUseChip \
   --verboseStats --statsFile=10k.1.lmm.txt
 ```
- 
-
+# PLINK
+```console
+mkdir plink
+cd plink
+plink --r2 --bfile ../10k/10k --chr-set 30 --out 1 --ld-window-r2 0 --ld-window 500 --ld-window-kb 10000
+plink --assoc --bfile ../10k/10k --allow-no-sex --chr-set 30 --pheno ../10k/pheno/1.bolt.txt --pheno-name QT --out 1
+```
