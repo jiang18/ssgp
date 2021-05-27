@@ -8,7 +8,6 @@ my ($plink) = @ARGV;
 
 open IN,"genotypes.true";
 open OUT,">$plink.ped";
-my %gt = (0=>11, 1=>12, 2=>22);
 while(<IN>)
 {
         chomp;
