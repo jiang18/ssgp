@@ -15,10 +15,11 @@ while(<IN>)
         my @c = split /\s+/;
         my @g = split //,$c[-1];
         print OUT "0 $c[1] 0 0 2 0";
-        for (@g) {
-                print OUT ' ',$gt{$_};
-        }
-        print OUT "\n";
+        
+        $c[-1] =~ s/2/ 22/g;
+	$c[-1] =~ s/1/ 12/g;
+	$c[-1] =~ s/0/ 11/g;
+        print OUT $c[-1],"\n";
 }
 close IN;
 close OUT;
