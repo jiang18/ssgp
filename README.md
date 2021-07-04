@@ -1,5 +1,10 @@
+# SNP-set based Genomic Prediction
+
+---
+
 # Executables
-https://drive.google.com/drive/folders/1SwDld404x6r4p3nIvf6g0VJ9Nh2ZRHtK?usp=sharing
+https://github.com/jiang18/ssgp/releases/tag/20210704
+
 
 # Simulation
 The procedures below generate genotypes and phenotypes of 500K individuals. Modify the sample size if needed. 
