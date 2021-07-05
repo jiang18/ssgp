@@ -69,7 +69,7 @@ OMP_NUM_THREADS=10 ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
 # [GCTA-fastGWA](https://cnsgenomics.com/software/gcta/#fastGWA)
-# BOLT
+# [BOLT](https://alkesgroup.broadinstitute.org/BOLT-LMM/BOLT-LMM_manual.html)
 ```console
 mkdir bolt
 cd bolt
@@ -80,7 +80,7 @@ cd bolt
   --numThreads=10 --Nautosomes=30 --LDscoresUseChip \
   --verboseStats --statsFile=10k.1.lmm.txt
 ```
-# PLINK
+# [PLINK](https://www.cog-genomics.org/plink/1.9/)
 ```console
 mkdir plink
 cd plink
