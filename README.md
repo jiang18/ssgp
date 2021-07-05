@@ -2,7 +2,7 @@
 
 ---
 
-# Executables
+# Executable
 https://github.com/jiang18/ssgp/releases/tag/20210704
 
 
