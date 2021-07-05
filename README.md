@@ -65,7 +65,7 @@ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k 
 ## LMM and GWA
 ```console
 ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k --trait QT --lmm --snp_info_file snp_info.csv --out 1 --num_threads 10 --num_qf_markers 30
-OMP_NUM_THREADS=10 ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
+ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
 # [GCTA-fastGWA](https://cnsgenomics.com/software/gcta/#fastGWA)
