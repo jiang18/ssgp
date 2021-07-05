@@ -68,7 +68,7 @@ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k 
 OMP_NUM_THREADS=10 ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
-# GCTA-fastGWA
+# [GCTA-fastGWA](https://cnsgenomics.com/software/gcta/#fastGWA)
 # BOLT
 ```console
 mkdir bolt
