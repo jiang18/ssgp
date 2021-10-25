@@ -3,7 +3,7 @@
 ---
 
 # Executable
-https://github.com/jiang18/ssgp/releases/tag/20210704
+https://github.com/jiang18/ssgp/releases/tag/20211024
 
 
 # Simulation
