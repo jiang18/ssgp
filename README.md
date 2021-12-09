@@ -62,7 +62,7 @@ cd ssgp
 ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k --trait QT --reml --snp_info_file snp_info.csv --out 1 --num_threads 10 --num_random_probes 30
 ```
 ## Weighted least squares
-```
+```console
 ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k --trait QT --wls --snp_info_file snp_info.csv --out 1 --num_threads 10
 ```
 ## LMM and GWA
