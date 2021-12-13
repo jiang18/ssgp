@@ -3,7 +3,7 @@
 ---
 
 # Executable
-https://github.com/jiang18/ssgp/releases/tag/20211209
+https://github.com/jiang18/ssgp/releases/tag/20211212
 
 # Simulation
 The procedures below generate genotypes and phenotypes of 500K individuals. Modify the sample size if needed. 
