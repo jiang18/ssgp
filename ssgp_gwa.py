@@ -1,3 +1,5 @@
+# January 11, 2022: enabled the use of reliability
+
 #!/usr/bin/python3
 import pgenlib
 import numpy as np
@@ -174,14 +176,16 @@ if __name__ == "__main__":
 	'''
 	pheno = {}
 	covar = {}
+	diagr = {}
 	covar_ct = None
 	with open(phenofile) as fp:
 		line = fp.readline()
-		covar_ct = len(line.strip().split()) - 2
+		covar_ct = len(line.strip().split()) - 3
 		for line in fp:
 			elem = line.strip().split()
 			pheno.update({elem[0] : elem[1]})
-			covar.update({elem[0] : elem[2:]})
+			covar.update({elem[0] : elem[2:(1+covar_ct)]})
+			diagr.update({elem[0] : elem[-1]})
 	sample_ct = len(pheno)
 	print("Sample count in SSGP file is", sample_ct)
 	print("Number of covariates is",covar_ct)
@@ -198,6 +202,7 @@ if __name__ == "__main__":
 	sample_subset = np.empty(sample_ct, dtype=np.uint32)
 	vec_y = np.empty(sample_ct, dtype=np.float32)
 	mat_covar = np.empty([sample_ct,covar_ct], dtype=np.float32)
+	vec_rr = np.empty(sample_ct, dtype=np.float32)
 	with open(psam) as fp:
 		header = None
 		first_cline = None 
@@ -216,6 +221,7 @@ if __name__ == "__main__":
 			sample_subset[idx] = raw_sample_ct
 			vec_y[idx] = pheno[iid]
 			mat_covar[idx,] = covar[iid]
+			vec_rr[idx] = diagr[iid]
 			idx += 1
 		for line in fp:
 			iid = line.strip().split()[iid_col]
@@ -225,6 +231,7 @@ if __name__ == "__main__":
 				sample_subset[idx] = raw_sample_ct
 				vec_y[idx] = pheno[iid]
 				mat_covar[idx,] = covar[iid]
+				vec_rr[idx] = diagr[iid]
 				idx += 1
 	raw_sample_ct += 1
 	print("Raw sample count in psam is", raw_sample_ct)
@@ -234,6 +241,9 @@ if __name__ == "__main__":
 	else:
 		print("Sample count in GWA is", sample_subset.size)
 	
+	# reciprocal square root of diagonal R
+	vec_rr = 1.0/np.sqrt(vec_rr)
+	mat_covar = np.transpose(np.transpose(mat_covar) * vec_rr)
 	# qr decomposition of covariate matrix
 	Q = linalg.qr(mat_covar, mode = "economic")[0]
 	del mat_covar
@@ -332,6 +342,7 @@ if __name__ == "__main__":
 				buf2 = buf1.astype('float32')
 				buf2_rmeans = buf2.mean(axis=1, keepdims=True)
 				rvars = ((2.-buf2_rmeans) * buf2_rmeans/2.)[:,0]
+				buf2 = np.multiply(buf2, vec_rr)
 				if covar_ct > 1:
 					buf2 = buf2 - np.matmul(np.matmul(buf2,Q), np.transpose(Q))
 				else:
@@ -347,6 +358,7 @@ if __name__ == "__main__":
 				half = half_int8.astype('float32')
 				half_rmeans = half.mean(axis=1, keepdims=True)
 				half_rvars = ((2.-half_rmeans) * half_rmeans/2.)[:,0]
+				half = np.multiply(half, vec_rr)
 				if covar_ct > 1:
 					half = half - np.matmul(np.matmul(half,Q), np.transpose(Q))
 				else:
@@ -369,6 +381,7 @@ if __name__ == "__main__":
 				vec_x_sum = vec_x.sum()
 				if vec_x_sum < args.mac or (2*sample_ct - vec_x_sum) < args.mac:
 					continue
+				vec_x = np.multiply(vec_x, vec_rr)
 				if covar_ct > 1:
 					vec_x = vec_x - np.dot(Q, np.dot(np.transpose(Q), vec_x))
 				else:
