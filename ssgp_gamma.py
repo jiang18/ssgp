@@ -1,3 +1,5 @@
+# January 11, 2022: enabled the use of reliability
+
 #!/usr/bin/python3
 import pgenlib
 import numpy as np
@@ -173,14 +175,16 @@ if __name__ == "__main__":
 	'''
 	pheno = {}
 	covar = {}
+	rsqrt = {}
 	covar_ct = None
 	with open(phenofile) as fp:
 		line = fp.readline()
-		covar_ct = len(line.strip().split()) - 2
+		covar_ct = len(line.strip().split()) - 3
 		for line in fp:
 			elem = line.strip().split()
 			pheno.update({elem[0] : elem[1]})
-			covar.update({elem[0] : elem[2:]})
+			covar.update({elem[0] : elem[2:(1+covar_ct)]})
+			rsqrt.update({elem[0] : elem[-1]})
 	sample_ct = len(pheno)
 	print("Sample count in SSGP file is", sample_ct)
 	print("Number of covariates is",covar_ct)
