@@ -72,7 +72,7 @@ ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
 ## Error weight
-The argument ```--error_weight_name``` can be added in --reml/--wls/--lmm to weight individual error variance. 
+The argument ```--error_weight_name``` can be added in --reml/--wls/--lmm to weight individual error variance. It is useful for dealing with reliability of EBVs. 
 # [GCTA-fastGWA](https://cnsgenomics.com/software/gcta/#fastGWA)
 # [BOLT](https://alkesgroup.broadinstitute.org/BOLT-LMM/BOLT-LMM_manual.html)
 ```console
