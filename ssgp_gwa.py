@@ -184,7 +184,7 @@ if __name__ == "__main__":
 		for line in fp:
 			elem = line.strip().split()
 			pheno.update({elem[0] : elem[1]})
-			covar.update({elem[0] : elem[2:(1+covar_ct)]})
+			covar.update({elem[0] : elem[2:(2+covar_ct)]})
 			diagr.update({elem[0] : elem[-1]})
 	sample_ct = len(pheno)
 	print("Sample count in SSGP file is", sample_ct)
