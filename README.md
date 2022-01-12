@@ -73,7 +73,7 @@ OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --ch
 ```
 ## Dependencies of ssgp_gamma.py and ssgp_gwa.py
 - Linux packages: python3, python3-devel, gcc, and gcc-c++
-- Python packages: cython, numpy, scipy, and [pgenlib][https://github.com/chrchang/plink-ng/tree/master/2.0/Python]
+- Python packages: cython, numpy, scipy, and [pgenlib](https://github.com/chrchang/plink-ng/tree/master/2.0/Python)
 ## Error weight
 The argument ```--error_weight_name``` can be added in --reml/--wls/--lmm to weight individual error variance. It is useful for dealing with reliability of EBVs. 
 # [GCTA-fastGWA](https://cnsgenomics.com/software/gcta/#fastGWA)
