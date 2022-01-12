@@ -71,6 +71,8 @@ ssgp --phenotype_file ../10k/pheno/1.ssgp.csv --binary_genotype_file ../10k/10k 
 ssgp_gamma.py --pfile ../10k/10k --ssgp 1 --out 1.gamma.txt
 OMP_NUM_THREADS=10 ssgp_gwa.py --pfile ../10k/10k --ssgp 1 --out 1.chr1.txt --chr 1
 ```
+## Error weight
+The argument ```--error_weight_name``` can be added in --reml/--wls/--lmm to weight individual error variance. 
 # [GCTA-fastGWA](https://cnsgenomics.com/software/gcta/#fastGWA)
 # [BOLT](https://alkesgroup.broadinstitute.org/BOLT-LMM/BOLT-LMM_manual.html)
 ```console
