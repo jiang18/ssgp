@@ -276,11 +276,9 @@ if __name__ == "__main__":
 					vec_x_sum = vec_x.sum()
 					if vec_x_sum < args.mac or (2*sample_ct - vec_x_sum) < args.mac:
 						continue
+					vec_x -= vec_x_sum/sample_ct
 					vec_x = np.multiply(vec_x, vec_rr)
-					if covar_ct > 1:
-						vec_x = vec_x - np.dot(Q, np.dot(np.transpose(Q), vec_x))
-					else:
-						vec_x -= vec_x_sum/sample_ct
+					vec_x = vec_x - np.dot(Q, np.dot(np.transpose(Q), vec_x))
 					xy = np.dot(vec_x, vec_y)
 					xx = np.dot(vec_x, vec_x)
 					beta = xy/xx * cfactor
