@@ -1,4 +1,5 @@
 # January 11, 2022: enabled the use of reliability
+# January 13, 2022: corrected genotype centering
 
 #!/usr/bin/python3
 import pgenlib
