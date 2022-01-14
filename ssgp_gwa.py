@@ -1,4 +1,5 @@
 # January 11, 2022: enabled the use of reliability
+# January 13, 2022: corrected genotype centering
 
 #!/usr/bin/python3
 import pgenlib
@@ -342,11 +343,9 @@ if __name__ == "__main__":
 				buf2 = buf1.astype('float32')
 				buf2_rmeans = buf2.mean(axis=1, keepdims=True)
 				rvars = ((2.-buf2_rmeans) * buf2_rmeans/2.)[:,0]
+				buf2 -= buf2_rmeans
 				buf2 = np.multiply(buf2, vec_rr)
-				if covar_ct > 1:
-					buf2 = buf2 - np.matmul(np.matmul(buf2,Q), np.transpose(Q))
-				else:
-					buf2 -= buf2_rmeans
+				buf2 = buf2 - np.matmul(np.matmul(buf2,Q), np.transpose(Q))
 				mat_h = np.matmul(buf2, np.transpose(buf2))
 				
 				half = buf2[block_step:,]
@@ -358,11 +357,10 @@ if __name__ == "__main__":
 				half = half_int8.astype('float32')
 				half_rmeans = half.mean(axis=1, keepdims=True)
 				half_rvars = ((2.-half_rmeans) * half_rmeans/2.)[:,0]
+				half -= half_rmeans
 				half = np.multiply(half, vec_rr)
-				if covar_ct > 1:
-					half = half - np.matmul(np.matmul(half,Q), np.transpose(Q))
-				else:
-					half -= half_rmeans
+				half = half - np.matmul(np.matmul(half,Q), np.transpose(Q))
+				
 				buf2[block_step:,] = half
 				rvars[block_step:] = half_rvars
 				mat_h[:block_step,:block_step] = mat_corner
