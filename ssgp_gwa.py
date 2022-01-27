@@ -1,5 +1,6 @@
 # January 11, 2022: enabled the use of reliability
 # January 13, 2022: corrected genotype centering
+# January 26, 2022: reduced block size if it is > # of model SNPs on a chr
 
 #!/usr/bin/python3
 import pgenlib
@@ -295,6 +296,10 @@ if __name__ == "__main__":
 	tested_var_ct = chr_end_idx - chr_start_idx + 1
 	print("Count of variants to be tested is", tested_var_ct)
 	print("Count of model variants to be used is", ksnp_ct)
+	
+	if block_size > ksnp_ct:
+		block_size = ksnp_ct
+		print("Warning: Block size in SSGP was too big, reduced to", ksnp_ct)
 	
 	ksnp_idx = np.array(ksnp_list, np.uint32)
 	block_step = int(block_size/2)
