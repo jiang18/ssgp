@@ -54,7 +54,7 @@ slemm --pred --binary_genotype ../500k --snp_estimate 1.snp.csv --output 1.gv
 ```console
 Rscript --no-save sim_phe.R 1 0.3
 ```
-# SSGP
+# SLEMM
 Note that the simulation procedures above generate a sample of 500K while the commands below work for a sample of 10K.
 ## REML
 ```console
