@@ -21,4 +21,4 @@ print(paste("VarP=",var(phe[,3]),sep=""))
 colnames(phe) = c("FID","IID","QT")
 write.table(phe,paste(ii,".bolt.txt",sep=""),row.names = FALSE, quote=FALSE)
 phe = phe[,2:ncol(phe)]
-write.csv(phe,paste(ii,".ssgp.csv",sep=""),row.names = FALSE, quote=FALSE)
+write.csv(phe,paste(ii,".slemm.csv",sep=""),row.names = FALSE, quote=FALSE)
