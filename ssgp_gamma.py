@@ -1,6 +1,6 @@
 # January 11, 2022: enabled the use of reliability
 # January 13, 2022: corrected genotype centering
-# March 10, 2022: rename SSGP to SLEMM
+# March 10, 2022: rename SSGP (ssgp) to SLEMM (slemm)
 
 #!/usr/bin/python3
 import pgenlib
@@ -131,20 +131,20 @@ if __name__ == "__main__":
 		print("Files do not exit:", pgen, psam, pvar)
 		sys.exit()
 	
-	phenofile = args.ssgp + ".reml.py.txt"
+	phenofile = args.slemm + ".reml.py.txt"
 	if not os.path.isfile(phenofile):
 		print("File path {} does not exist.".format(phenofile))
 		sys.exit()
-	gsfile = args.ssgp + ".gstat.txt"
+	gsfile = args.slemm + ".gstat.txt"
 	if not os.path.isfile(gsfile):
 		print("File path {} does not exist.".format(gsfile))
 		sys.exit()
-	vcfile = args.ssgp + ".reml.vc.csv"
+	vcfile = args.slemm + ".reml.vc.csv"
 	if not os.path.isfile(vcfile):
 		print("File path {} does not exist.".format(vcfile))
 		sys.exit()
 	
-	# SSGP gstat file
+	# SLEMM gstat file
 	# Compute correction factor
 	cfactor = None
 	with open(gsfile) as fp:
@@ -157,7 +157,7 @@ if __name__ == "__main__":
 			r.append(y/x)
 		cfactor = mean_wo_outliers(r)
 	print("Correction factor is", cfactor)
-	# SSGP vc file
+	# SLEMM vc file
 	# Get variances
 	snp_var = None
 	err_var = None
@@ -171,8 +171,8 @@ if __name__ == "__main__":
 	tau = err_var/snp_var
 	
 	'''
-	Get phenotypes in SSGP reml.py file and store 
-	them in dict pheno. All the SSGP samples are 
+	Get phenotypes in SLEMM reml.py file and store 
+	them in dict pheno. All the SLEMM samples are 
 	in .psam file.
 	'''
 	pheno = {}
@@ -188,7 +188,7 @@ if __name__ == "__main__":
 			covar.update({elem[0] : elem[2:(2+covar_ct)]})
 			diagr.update({elem[0] : elem[-1]})
 	sample_ct = len(pheno)
-	print("Sample count in SSGP file is", sample_ct)
+	print("Sample count in SLEMM file is", sample_ct)
 	print("Number of covariates is",covar_ct)
 	
 	if 2*sample_ct*args.maf > args.mac:
