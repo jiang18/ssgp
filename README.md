@@ -1,5 +1,5 @@
 # SLEMM
-# Stochastic-Lanczos-expedited mixed models
+## Stochastic-Lanczos-expedited mixed models
 
 ---
 
