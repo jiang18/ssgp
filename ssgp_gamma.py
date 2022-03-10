@@ -1,5 +1,6 @@
 # January 11, 2022: enabled the use of reliability
 # January 13, 2022: corrected genotype centering
+# March 10, 2022: rename SSGP to SLEMM
 
 #!/usr/bin/python3
 import pgenlib
@@ -47,9 +48,9 @@ def get_parser():
 						dest="psam",
 						help="PLINK2 psam file",
 						metavar="<filename>")
-	parser.add_argument("-b", "--ssgp", required=True,
-						dest="ssgp",
-						help="SSGP LMM filename prefix",
+	parser.add_argument("-b", "--slemm", required=True,
+						dest="slemm",
+						help="SLEMM LMM filename prefix",
 						metavar="<prefix>")
 	parser.add_argument("-o", "--out", required=True,
 						dest="out",
