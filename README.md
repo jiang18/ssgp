@@ -1,3 +1,6 @@
+# SSGP is deprecated as of Mar 10, 2022. 
+# Please use [SLEMM](https://github.com/jiang18/slemm) instead.
+
 # SNP-set based Genomic Prediction
 
 ---
